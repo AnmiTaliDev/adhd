@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест на СДВГ - Самопроверка</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* AnmiTali's HIG System */
+        :root {
+            --hig-bg-primary: #FFFFFF;
+            --hig-bg-secondary: #F8F9FA;
+            --hig-text-primary: #2D3748;
+            --hig-text-secondary: #718096;
+            --hig-text-light: #A0AEC0;
+            --hig-accent: #10B981;
+            --hig-accent-hover: #059669;
+            --hig-border: #E2E8F0;
+            --hig-shadow: rgba(0, 0, 0, 0.1);
+            --hig-warning: #D97706;
+            --hig-info: #0284C7;
+            
+            --hig-space-xs: 8px;
+            --hig-space-sm: 16px;
+            --hig-space-md: 24px;
+            --hig-space-lg: 32px;
+            --hig-space-xl: 48px;
+            
+            --hig-radius-sm: 8px;
+            --hig-radius-md: 12px;
+            --hig-radius-lg: 16px;
+            
+            --hig-transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--hig-bg-primary);
+            color: var(--hig-text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 768px;
+            margin: 0 auto;
+            padding: 0 var(--hig-space-md);
+        }
+
+        .header {
+            text-align: center;
+            padding: var(--hig-space-xl) 0;
+            margin-bottom: var(--hig-space-lg);
+        }
+
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: var(--hig-space-sm);
+            color: var(--hig-text-primary);
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--hig-text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--hig-bg-primary);
+            border: 1px solid var(--hig-border);
+            border-radius: var(--hig-radius-lg);
+            padding: var(--hig-space-lg);
+            box-shadow: 0 1px 3px var(--hig-shadow);
+            margin-bottom: var(--hig-space-md);
+            transition: all var(--hig-transition);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--hig-shadow);
+        }
+
+        .alert {
+            padding: var(--hig-space-md);
+            border-radius: var(--hig-radius-sm);
+            border-left: 4px solid;
+            margin: var(--hig-space-md) 0;
+        }
+
+        .alert-warning {
+            background: rgba(217, 119, 6, 0.1);
+            border-color: var(--hig-warning);
+            color: var(--hig-warning);
+        }
+
+        .alert-info {
+            background: rgba(2, 132, 199, 0.1);
+            border-color: var(--hig-info);
+            color: var(--hig-info);
+        }
+
+        .button {
+            background: var(--hig-accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--hig-radius-md);
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--hig-transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .button:hover {
+            background: var(--hig-accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+        }
+
+        .button-secondary {
+            background: var(--hig-bg-primary);
+            color: var(--hig-text-primary);
+            border: 1px solid var(--hig-border);
+        }
+
+        .button-secondary:hover {
+            background: var(--hig-bg-secondary);
+            box-shadow: 0 4px 12px var(--hig-shadow);
+        }
+
+        .button-group {
+            display: flex;
+            gap: var(--hig-space-sm);
+            margin-top: var(--hig-space-md);
+            flex-wrap: wrap;
+        }
+
+        .question {
+            margin-bottom: var(--hig-space-md);
+            padding: var(--hig-space-md);
+            background: var(--hig-bg-secondary);
+            border-radius: var(--hig-radius-sm);
+        }
+
+        .question h3 {
+            margin-bottom: var(--hig-space-sm);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--hig-space-xs);
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: var(--hig-space-xs);
+            padding: var(--hig-space-xs);
+            border-radius: var(--hig-radius-sm);
+            transition: background var(--hig-transition);
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .option input[type="radio"] {
+            accent-color: var(--hig-accent);
+        }
+
+        .results {
+            text-align: center;
+            padding: var(--hig-space-lg);
+        }
+
+        .results h2 {
+            margin-bottom: var(--hig-space-md);
+            color: var(--hig-accent);
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--hig-accent);
+            margin-bottom: var(--hig-space-sm);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--hig-bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: var(--hig-space-md);
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--hig-accent);
+            transition: width 0.3s ease;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--hig-space-lg);
+        }
+
+        .section {
+            margin-bottom: var(--hig-space-xl);
+        }
+
+        .symptoms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--hig-space-md);
+            margin: var(--hig-space-lg) 0;
+        }
+
+        .symptom-card {
+            background: var(--hig-bg-secondary);
+            padding: var(--hig-space-md);
+            border-radius: var(--hig-radius-md);
+            border: 1px solid var(--hig-border);
+        }
+
+        .symptom-card h3 {
+            color: var(--hig-accent);
+            margin-bottom: var(--hig-space-sm);
+            font-size: 1.1rem;
+        }
+
+        .symptom-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .symptom-card li {
+            padding: var(--hig-space-xs) 0;
+            border-bottom: 1px solid var(--hig-border);
+        }
+
+        .symptom-card li:last-child {
+            border-bottom: none;
+        }
+
+        .symptom-card li::before {
+            content: "•";
+            color: var(--hig-accent);
+            margin-right: var(--hig-space-xs);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--hig-space-sm);
+            }
+            
+            .header h1 {
+                font-size: 1.875rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Тест на СДВГ</h1>
+            <p>Самопроверка симптомов синдрома дефицита внимания и гиперактивности</p>
+        </header>
+
+        <!-- Информация о СДВГ -->
+        <section id="info" class="section">
+            <div class="card">
+                <h2>Что такое СДВГ?</h2>
+                <p>Синдром дефицита внимания и гиперактивности (СДВГ) — это неврологическое расстройство, которое влияет на способность концентрироваться, контролировать импульсы и регулировать уровень активности.</p>
+                
+                <div class="symptoms-grid">
+                    <div class="symptom-card">
+                        <h3>Невнимательность</h3>
+                        <ul>
+                            <li>Трудности с концентрацией</li>
+                            <li>Частые ошибки по невнимательности</li>
+                            <li>Проблемы с организацией</li>
+                            <li>Избегание задач, требующих внимания</li>
+                            <li>Забывчивость в повседневной деятельности</li>
+                        </ul>
+                    </div>
+                    <div class="symptom-card">
+                        <h3>Гиперактивность</h3>
+                        <ul>
+                            <li>Неусидчивость, беспокойство</li>
+                            <li>Чрезмерная говорливость</li>
+                            <li>Трудности с тихими занятиями</li>
+                            <li>Ощущение внутреннего напряжения</li>
+                            <li>Постоянная потребность в движении</li>
+                        </ul>
+                    </div>
+                    <div class="symptom-card">
+                        <h3>Импульсивность</h3>
+                        <ul>
+                            <li>Поспешные ответы и решения</li>
+                            <li>Трудности с ожиданием очереди</li>
+                            <li>Прерывание других людей</li>
+                            <li>Риск в принятии решений</li>
+                            <li>Эмоциональная нестабильность</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ Важное предупреждение:</strong> Этот тест носит исключительно образовательный характер и НЕ ЯВЛЯЕТСЯ медицинской диагностикой. Результаты могут указывать на возможные симптомы, но только квалифицированный специалист может поставить диагноз СДВГ.
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 Когда стоит обратиться к специалисту:</strong> Если симптомы серьёзно влияют на вашу работу, учёбу, отношения или ежедневную жизнь на протяжении 6 месяцев и более.
+            </div>
+
+            <div class="button-group">
+                <button class="button" onclick="startTest('simple')">Простой тест (5 минут)</button>
+                <button class="button button-secondary" onclick="startTest('detailed')">Подробный тест (10 минут)</button>
+            </div>
+        </section>
+
+        <!-- Тест -->
+        <section id="test" class="section hidden">
+            <div class="card">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div id="question-container"></div>
+                <div class="navigation">
+                    <button class="button button-secondary" onclick="previousQuestion()" id="prevBtn" disabled>Назад</button>
+                    <button class="button" onclick="nextQuestion()" id="nextBtn">Далее</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Результаты -->
+        <section id="results" class="section hidden">
+            <div class="card results">
+                <h2>Результаты теста</h2>
+                <div class="score" id="scoreDisplay">0</div>
+                <div id="interpretation"></div>
+                <div class="button-group">
+                    <button class="button button-secondary" onclick="restartTest()">Пройти заново</button>
+                    <button class="button" onclick="showInfo()">О СДВГ</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Данные тестов
+        const simpleQuestions = [
+            {
+                question: "Как часто вам трудно концентрироваться на задачах или деятельности?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы забываете о важных встречах или обязательствах?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы чувствуете беспокойство или не можете усидеть на месте?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы принимаете поспешные решения, не подумав о последствиях?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вам трудно организовать свои дела и управлять временем?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            }
+        ];
+
+        const detailedQuestions = [
+            {
+                question: "Как часто вы допускаете ошибки по невнимательности в работе или других делах?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вам трудно удерживать внимание на задачах или играх?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто кажется, что вы не слушаете, когда к вам обращаются напрямую?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы не доводите дела до конца (начинаете, но быстро теряете интерес)?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто у вас проблемы с организацией задач и деятельности?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы избегаете задач, требующих длительного умственного напряжения?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы теряете вещи, необходимые для работы (ключи, документы, инструменты)?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вас легко отвлекают посторонние раздражители?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы забывчивы в повседневной деятельности?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы беспокойно двигаете руками/ногами или ёрзаете на стуле?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы встаёте в ситуациях, когда ожидается, что вы останетесь на месте?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы чувствуете беспокойство или напряжённость?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вам трудно тихо отдыхать или спокойно заниматься досугом?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы чувствуете себя 'заведённым' или действуете как будто 'на моторе'?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы говорите чрезмерно много?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы отвечаете прежде, чем вопрос будет полностью задан?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вам трудно дожидаться своей очереди?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            },
+            {
+                question: "Как часто вы прерываете других или вмешиваетесь в разговоры/игры?",
+                options: ["Никогда (0)", "Редко (1)", "Иногда (2)", "Часто (3)", "Очень часто (4)"]
+            }
+        ];
+
+        let currentTest = [];
+        let currentQuestionIndex = 0;
+        let answers = [];
+        let testType = '';
+
+        function startTest(type) {
+            testType = type;
+            currentTest = type === 'simple' ? simpleQuestions : detailedQuestions;
+            currentQuestionIndex = 0;
+            answers = [];
+            
+            document.getElementById('info').classList.add('hidden');
+            document.getElementById('test').classList.remove('hidden');
+            document.getElementById('results').classList.add('hidden');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = currentTest[currentQuestionIndex];
+            const container = document.getElementById('question-container');
+            
+            container.innerHTML = `
+                <div class="question">
+                    <h3>Вопрос ${currentQuestionIndex + 1} из ${currentTest.length}</h3>
+                    <p>${question.question}</p>
+                    <div class="options">
+                        ${question.options.map((option, index) => `
+                            <label class="option">
+                                <input type="radio" name="answer" value="${index}" ${answers[currentQuestionIndex] === index ? 'checked' : ''}>
+                                <span>${option}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            updateProgress();
+            updateNavigation();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / currentTest.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function updateNavigation() {
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (currentQuestionIndex === currentTest.length - 1) {
+                nextBtn.textContent = 'Завершить тест';
+            } else {
+                nextBtn.textContent = 'Далее';
+            }
+        }
+
+        function nextQuestion() {
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+            if (selectedAnswer) {
+                answers[currentQuestionIndex] = parseInt(selectedAnswer.value);
+            }
+            
+            if (currentQuestionIndex < currentTest.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+            }
+        }
+
+        function showResults() {
+            const totalScore = answers.reduce((sum, answer) => sum + answer, 0);
+            const maxScore = currentTest.length * 4;
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            
+            document.getElementById('test').classList.add('hidden');
+            document.getElementById('results').classList.remove('hidden');
+            document.getElementById('scoreDisplay').textContent = `${totalScore}/${maxScore}`;
+            
+            let interpretation = '';
+            if (testType === 'simple') {
+                if (percentage < 25) {
+                    interpretation = `
+                        <h3 style="color: var(--hig-accent);">Низкая вероятность СДВГ</h3>
+                        <p>Ваши ответы указывают на низкую вероятность наличия симптомов СДВГ. Если у вас есть конкретные опасения, рекомендуем обратиться к специалисту.</p>
+                    `;
+                } else if (percentage < 50) {
+                    interpretation = `
+                        <h3 style="color: var(--hig-warning);">Умеренные симптомы</h3>
+                        <p>Некоторые симптомы могут указывать на возможные признаки СДВГ. Рекомендуем пройти подробный тест или проконсультироваться со специалистом.</p>
+                    `;
+                } else {
+                    interpretation = `
+                        <h3 style="color: var(--hig-warning);">Выраженные симптомы</h3>
+                        <p>Ваши ответы указывают на возможное наличие симптомов СДВГ. Настоятельно рекомендуем обратиться к квалифицированному специалисту для профессиональной оценки.</p>
+                    `;
+                }
+            } else {
+                if (percentage < 30) {
+                    interpretation = `
+                        <h3 style="color: var(--hig-accent);">Низкая вероятность СДВГ</h3>
+                        <p>Ваши ответы указывают на низкую вероятность наличия клинически значимых симптомов СДВГ.</p>
+                    `;
+                } else if (percentage < 50) {
+                    interpretation = `
+                        <h3 style="color: var(--hig-warning);">Умеренные симптомы</h3>
+                        <p>Некоторые симптомы могут указывать на возможные признаки СДВГ. Если эти симптомы влияют на вашу повседневную жизнь, рекомендуем консультацию специалиста.</p>
+                    `;
+                } else if (percentage < 70) {
+                    interpretation = `
+                        <h3 style="color: var(--hig-warning);">Выраженные симптомы</h3>
+                        <p>Ваши ответы указывают на значительные симптомы, которые могут быть связаны с СДВГ. Рекомендуем обратиться к специалисту для диагностики.</p>
+                    `;
+                } else {
+                    interpretation = `
+                        <h3 style="color: #DC2626;">Высокая вероятность СДВГ</h3>
+                        <p>Ваши ответы указывают на высокую вероятность наличия симптомов СДВГ. Настоятельно рекомендуем незамедлительно обратиться к квалифицированному специалисту.</p>
+                    `;
+                }
+            }
+            
+            interpretation += `
+                <div class="alert alert-warning" style="margin-top: var(--hig-space-md); text-align: left;">
+                    <strong>Помните:</strong> Этот тест не заменяет медицинскую диагностику. Только врач может поставить диагноз СДВГ после комплексного обследования.
+                </div>
+            `;
+            
+            document.getElementById('interpretation').innerHTML = interpretation;
+        }
+
+        function restartTest() {
+            document.getElementById('info').classList.remove('hidden');
+            document.getElementById('test').classList.add('hidden');
+            document.getElementById('results').classList.add('hidden');
+        }
+
+        function showInfo() {
+            restartTest();
+        }
+
+        // Обработчик для радиокнопок
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'radio') {
+                answers[currentQuestionIndex] = parseInt(e.target.value);
+            }
+        });
+    </script>
+</body>
+</html>
